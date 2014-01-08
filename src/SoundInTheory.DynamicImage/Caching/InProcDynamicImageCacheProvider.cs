@@ -15,12 +15,12 @@ namespace SoundInTheory.DynamicImage.Caching
 			get { return _cache ?? (_cache = HttpRuntime.Cache); }
 		}
 
-		public override bool ExistsInCache(string cacheKey)
+        public override bool ExistsInCache(string cacheKey)
 		{
 			return (Cache.Get(cacheKey) != null);
 		}
 
-		public override void AddToCache(string cacheKey, GeneratedImage generatedImage, Dependency[] dependencies)
+        public override void AddToCache(string cacheKey, GeneratedImage generatedImage, Dependency[] dependencies)
 		{
 			InProcCacheEntry cacheEntry = new InProcCacheEntry
 			{
@@ -30,7 +30,7 @@ namespace SoundInTheory.DynamicImage.Caching
 			Cache.Insert(cacheKey, cacheEntry);
 		}
 
-		public override ImageProperties GetPropertiesFromCache(string cacheKey)
+        public override ImageProperties GetPropertiesFromCache(string cacheKey)
 		{
 			return ((InProcCacheEntry)Cache.Get(cacheKey)).GeneratedImage.Properties;
 		}
@@ -41,7 +41,7 @@ namespace SoundInTheory.DynamicImage.Caching
 				.ForEach(de => Cache.Remove((string) de.Key));
 		}
 
-		public override void RemoveFromCache(Dependency dependency)
+        public override void RemoveFromCache(Dependency dependency)
 		{
 			foreach (var dictionaryEntry in Cache.Cast<DictionaryEntry>().Where(de => de.Value is InProcCacheEntry))
 			{
@@ -51,7 +51,7 @@ namespace SoundInTheory.DynamicImage.Caching
 			}
 		}
 
-		public override DateTime GetImageLastModifiedDate(HttpContext context, string cacheKey, string fileExtension)
+		public override DateTime GetImageLastModifiedDate(string cacheKey, string fileExtension)
 		{
 			return DateTime.Now;
 		}

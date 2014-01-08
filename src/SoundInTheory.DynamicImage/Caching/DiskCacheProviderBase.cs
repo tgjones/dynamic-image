@@ -1,3 +1,5 @@
+using SoundInTheory.DynamicImage.Configuration;
+using SoundInTheory.DynamicImage.Util;
 using System;
 using System.Collections.Specialized;
 using System.IO;
@@ -8,7 +10,7 @@ namespace SoundInTheory.DynamicImage.Caching
 {
 	public abstract class DiskCacheProviderBase : DynamicImageCacheProvider
 	{
-		private string _cachePath = "~/App_Data/DynamicImage";
+        private string _cachePath = "~/App_Data/DynamicImage";
 
 		protected string CachePath
 		{
@@ -19,33 +21,31 @@ namespace SoundInTheory.DynamicImage.Caching
 		{
 			if (!string.IsNullOrEmpty(config["cachePath"]))
 				_cachePath = config["cachePath"];
+
 			base.Initialize(name, config);
 		}
 
-		public override DateTime GetImageLastModifiedDate(HttpContext context, string cacheKey, string fileExtension)
+		public override DateTime GetImageLastModifiedDate(string cacheKey, string fileExtension)
 		{
-			string filePath = GetDiskCacheFilePath(context, cacheKey, fileExtension);
-			return File.GetLastWriteTime(context.Server.MapPath(filePath));
+			string filePath = GetDiskCacheFilePath(cacheKey, fileExtension);
+			return File.GetLastWriteTime(FileSourceHelper.FilePathOnServer(filePath));
 		}
 
 		public override void SendImageToHttpResponse(HttpContext context, string cacheKey, string fileExtension)
 		{
 			// Instead of sending image directly to the response, just call RewritePath and let IIS
 			// handle the actual serving of the image.
-			string filePath = GetDiskCacheFilePath(context, cacheKey, fileExtension);
+			string filePath = GetDiskCacheFilePath(cacheKey, fileExtension);
 
 			context.Items["FinalCachedFile"] = context.Server.MapPath(filePath);
 
 			context.RewritePath(filePath, false);
 		}
 
-		private string GetDiskCacheFilePath(HttpContext httpContext, string cacheProviderKey, string fileExtension)
+		private string GetDiskCacheFilePath(string cacheProviderKey, string fileExtension)
 		{
-			if (httpContext == null)
-				throw new InvalidOperationException("HttpContext.Current is null; SqlCacheProviderBase only supports being run within the context of a web request.");
-
 			string cachePathWithHash = CachePath + "/" + cacheProviderKey.Substring(0, 2);
-			string imageCacheFolder = httpContext.Server.MapPath(cachePathWithHash);
+            string imageCacheFolder = FileSourceHelper.FilePathOnServer(cachePathWithHash);
 			if (!Directory.Exists(imageCacheFolder))
 				Directory.CreateDirectory(imageCacheFolder);
 
@@ -59,8 +59,7 @@ namespace SoundInTheory.DynamicImage.Caching
 			if (!generatedImage.Properties.IsImagePresent)
 				return;
 
-			HttpContext httpContext = HttpContext.Current;
-			string filePath = httpContext.Server.MapPath(GetDiskCacheFilePath(httpContext, cacheKey, generatedImage.Properties.FileExtension));
+            string filePath = FileSourceHelper.FilePathOnServer(GetDiskCacheFilePath(cacheKey, generatedImage.Properties.FileExtension));
 
 			using (FileStream fileStream = File.OpenWrite(filePath))
 			{
@@ -70,9 +69,9 @@ namespace SoundInTheory.DynamicImage.Caching
 			}
 		}
 
-		protected void DeleteImageFromDiskCache(string cacheKey, ImageProperties imageProperties, HttpContext httpContext)
+		protected void DeleteImageFromDiskCache(string cacheKey, ImageProperties imageProperties)
 		{
-			string filePath = httpContext.Server.MapPath(GetDiskCacheFilePath(httpContext, cacheKey, imageProperties.FileExtension));
+            string filePath = FileSourceHelper.FilePathOnServer(GetDiskCacheFilePath(cacheKey, imageProperties.FileExtension));
 			DeleteImageFromDiskCache(imageProperties, filePath);
 		}
 

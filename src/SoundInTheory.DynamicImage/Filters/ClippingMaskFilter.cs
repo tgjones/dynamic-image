@@ -49,9 +49,9 @@ namespace SoundInTheory.DynamicImage.Filters
 
 		#region Methods
 
-		protected override Effect GetEffect(ImageGenerationContext context, FastBitmap source)
+        protected override Effect GetEffect(FastBitmap source)
 		{
-            FastBitmap maskBitmap = MaskImage.GetBitmap(context);
+            FastBitmap maskBitmap = MaskImage.GetBitmap();
 			_maskImageWidth = maskBitmap.Width;
 			_maskImageHeight = maskBitmap.Height;
 			return new ClippingMaskEffect

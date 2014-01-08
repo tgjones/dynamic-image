@@ -49,7 +49,7 @@ namespace SoundInTheory.DynamicImage.Filters
 		/// <returns>The transformed rectangle.</returns>
 		protected virtual Int32Rect GetTransformedSpace(Int32Rect rect) { return rect; }
 
-        public sealed override void ApplyFilter(ImageGenerationContext context, FastBitmap bitmap)
+        public sealed override void ApplyFilter(FastBitmap bitmap)
 		{
 			OnBeginApplyFilter(bitmap);
 

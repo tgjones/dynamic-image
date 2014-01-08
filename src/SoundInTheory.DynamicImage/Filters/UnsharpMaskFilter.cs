@@ -69,7 +69,7 @@ namespace SoundInTheory.DynamicImage.Filters
 			return true;
 		}
 
-        protected override Effect GetEffect(ImageGenerationContext context, FastBitmap source)
+        protected override Effect GetEffect(FastBitmap source)
 		{
 			// Fill temporary graphics buffer with mask (currently always a rectangle).
 			DrawingVisual dv = new DrawingVisual

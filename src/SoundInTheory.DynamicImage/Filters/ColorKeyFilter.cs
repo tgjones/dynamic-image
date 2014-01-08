@@ -42,7 +42,7 @@ namespace SoundInTheory.DynamicImage.Filters
 
 		#endregion
 
-		protected override Effect GetEffect(ImageGenerationContext context, FastBitmap source)
+        protected override Effect GetEffect(FastBitmap source)
 		{
 			SWMColor transparentColor;
 			if (UseFirstPixel)

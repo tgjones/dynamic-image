@@ -8,7 +8,7 @@ namespace SoundInTheory.DynamicImage.Filters
 {
 	public abstract class TransferFilter : ShaderEffectFilter
 	{
-		protected override Effect GetEffect(ImageGenerationContext context, FastBitmap source)
+        protected override Effect GetEffect(FastBitmap source)
 		{
 			FastBitmap transferLookup = new FastBitmap(1, 256);
 			transferLookup.Lock();

@@ -36,16 +36,16 @@ namespace SoundInTheory.DynamicImage.Layers
 
 		#endregion
 
-		protected override void CreateImage(ImageGenerationContext context)
+        protected override void CreateImage()
 		{
-            FastBitmap sourceValue = this.Source.GetBitmap(context);
+            FastBitmap sourceValue = this.Source.GetBitmap();
 			if (sourceValue != null && sourceValue.InnerBitmap != null)
 			{
 				this.Bitmap = sourceValue;
 			}
 			else if (AlternateSource != null)
 			{
-				sourceValue = this.AlternateSource.GetBitmap(context);
+				sourceValue = this.AlternateSource.GetBitmap();
 				if (sourceValue != null && sourceValue.InnerBitmap != null)
 					this.Bitmap = sourceValue;
 			}

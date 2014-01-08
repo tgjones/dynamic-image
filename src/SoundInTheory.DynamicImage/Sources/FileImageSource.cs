@@ -15,9 +15,9 @@ namespace SoundInTheory.DynamicImage.Sources
 			set { this["FileName"] = value; }
 		}
 
-		public override FastBitmap GetBitmap(ImageGenerationContext context)
+		public override FastBitmap GetBitmap()
 		{
-            string resolvedFileName = FileSourceHelper.ResolveFileName(context, FileName);
+            string resolvedFileName = FileSourceHelper.ResolveFileName(FileName);
 			if (File.Exists(resolvedFileName))
 				return new FastBitmap(resolvedFileName);
 			return null;

@@ -78,20 +78,17 @@ namespace SoundInTheory.DynamicImage
 
 		#endregion
 
-	    public GeneratedImage GenerateImage()
+        public GeneratedImage GenerateImage()
 	    {
 	        return GenerateImageAsync().Result;
 	    }
 
-	    public Task<GeneratedImage> GenerateImageAsync()
+        public Task<GeneratedImage> GenerateImageAsync()
 	    {
-            // Create image in separate thread, and wait for result.
-            var context = new ImageGenerationContext(HttpContext.Current);
-
             return new TaskFactory(DispatcherTaskScheduler.Default)
                 .StartNew(() =>
                 {
-                    var image = CreateImage(context);
+                    var image = CreateImage();
 
                     var properties = new ImageProperties
                     {
@@ -110,14 +107,14 @@ namespace SoundInTheory.DynamicImage
                 });
 	    }
 
-        private BitmapSource CreateImage(ImageGenerationContext context)
+        private BitmapSource CreateImage()
 		{
 			ValidateParameters();
 
 			// First, we process layers which have a specific size.
 			foreach (Layer layer in VisibleLayers)
 				if (layer.HasFixedSize)
-					layer.Process(context);
+					layer.Process();
 
 			// Second, for SizeMode = Auto, we calculate the output dimensions
 			// based on the union of all layers' (which have an explicit size) dimensions.
@@ -159,7 +156,7 @@ namespace SoundInTheory.DynamicImage
 					layer.CalculatedWidth = outputWidth;
 					layer.CalculatedHeight = outputHeight;
 
-					layer.Process(context);
+					layer.Process();
 				}
 
 			// If any of the layers are not present, we don't create the image
@@ -234,7 +231,7 @@ namespace SoundInTheory.DynamicImage
 			// Apply global filters.
 			foreach (Filter filter in Filters)
 				if (filter.Enabled)
-					filter.ApplyFilter(context, output);
+					filter.ApplyFilter(output);
 
 			// If image format doesn't support transparency, make all transparent pixels totally opaque.
 			// Otherwise WPF wants to save them as black.

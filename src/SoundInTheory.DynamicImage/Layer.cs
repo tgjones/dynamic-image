@@ -106,17 +106,17 @@ namespace SoundInTheory.DynamicImage
 
 		#endregion
 
-        public void Process(ImageGenerationContext context)
+        public void Process()
 		{
-			CreateImage(context);
+			CreateImage();
 
 			if (Bitmap != null)
 				foreach (Filter filter in Filters)
 					if (filter.Enabled)
-						filter.ApplyFilter(context, Bitmap);
+						filter.ApplyFilter(Bitmap);
 		}
 
-		protected abstract void CreateImage(ImageGenerationContext context);
+        protected abstract void CreateImage();
 
 		public virtual void PopulateDependencies(List<Dependency> dependencies) { }
 	}

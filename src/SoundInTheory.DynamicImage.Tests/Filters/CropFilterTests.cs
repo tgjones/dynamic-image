@@ -19,7 +19,7 @@ namespace SoundInTheory.DynamicImage.Tests.Filters
 			cropFilter.Width = 200;
 			cropFilter.Height = 200;
 
-			cropFilter.ApplyFilter(null, bitmap);
+			cropFilter.ApplyFilter(bitmap);
 
 			Assert.AreEqual(200, bitmap.Width);
 			Assert.AreEqual(200, bitmap.Height);

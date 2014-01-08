@@ -10,7 +10,7 @@ namespace SoundInTheory.DynamicImage.Sources
 			set { this["Bytes"] = value; }
 		}
 
-		public override FastBitmap GetBitmap(ImageGenerationContext context)
+		public override FastBitmap GetBitmap()
 		{
 			byte[] bytes = this.Bytes;
 			if (bytes != null && bytes.Length > 0)

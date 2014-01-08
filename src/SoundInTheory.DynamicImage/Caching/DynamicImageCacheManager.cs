@@ -91,31 +91,31 @@ namespace SoundInTheory.DynamicImage.Caching
 			}
 		}
 
-		internal static bool Exists(string cacheKey)
+        internal static bool Exists(string cacheKey)
 		{
 			return Provider.ExistsInCache(cacheKey);
 		}
 
-		internal static void Add(string cacheKey, GeneratedImage generatedImage, Dependency[] dependencies)
+        internal static void Add(string cacheKey, GeneratedImage generatedImage, Dependency[] dependencies)
 		{
 			Provider.AddToCache(cacheKey, generatedImage, dependencies);
 		}
 
-		internal static DateTime GetImageLastModifiedDate(HttpContext context, string cacheProviderKey, string fileExtension)
+		internal static DateTime GetImageLastModifiedDate(string cacheProviderKey, string fileExtension)
 		{
-			return Provider.GetImageLastModifiedDate(context, cacheProviderKey, fileExtension);
+			return Provider.GetImageLastModifiedDate(cacheProviderKey, fileExtension);
 		}
 
-		internal static ImageProperties GetProperties(string cacheKey)
+        internal static ImageProperties GetProperties(string cacheKey)
 		{
 			return Provider.GetPropertiesFromCache(cacheKey);
 		}
 
-		public static void Remove(ImageSource source)
+        public static void Remove(ImageSource source)
 		{
 			var dependencies = new List<Dependency>();
 			source.PopulateDependencies(dependencies);
-			dependencies.ForEach(RemoveByDependency);
+            dependencies.ForEach(RemoveByDependency);
 		}
 
 		public static void RemoveAll()
@@ -123,7 +123,7 @@ namespace SoundInTheory.DynamicImage.Caching
 			Provider.RemoveAllFromCache();
 		}
 
-		private static void RemoveByDependency(Dependency dependency)
+        private static void RemoveByDependency(Dependency dependency)
 		{
 			Provider.RemoveFromCache(dependency);
 		}

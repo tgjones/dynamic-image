@@ -2,6 +2,7 @@ using System.Configuration;
 using System.Windows.Media.Imaging;
 using SoundInTheory.DynamicImage.Caching;
 using SoundInTheory.DynamicImage.Configuration;
+using System.Web;
 
 namespace SoundInTheory.DynamicImage.Fluent
 {
@@ -14,14 +15,14 @@ namespace SoundInTheory.DynamicImage.Fluent
 			get { return _composition; }
 		}
 
-		public CompositionBuilder()
-		{
-			_composition = new Composition();
+        public CompositionBuilder()
+        {
+            _composition = new Composition();
 
-			var config = (DynamicImageSection) ConfigurationManager.GetSection("soundInTheory/dynamicImage");
-			if (config != null)
-				_composition.ImageFormat = config.DefaultImageFormat;
-		}
+            var config = (DynamicImageSection)ConfigurationManager.GetSection("soundInTheory/dynamicImage");
+            if (config != null)
+                _composition.ImageFormat = config.DefaultImageFormat;
+        }
 
 		public string Url
 		{

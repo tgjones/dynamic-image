@@ -30,7 +30,7 @@ namespace SoundInTheory.DynamicImage.Filters
 
 		#region Methods
 
-        protected override Effect GetEffect(ImageGenerationContext context, FastBitmap source)
+        protected override Effect GetEffect(FastBitmap source)
 		{
 			return new BrightnessAdjustmentEffect
 			{

@@ -1,3 +1,5 @@
+using SoundInTheory.DynamicImage.Configuration;
+using SoundInTheory.DynamicImage.Util;
 using System;
 using System.IO;
 using System.Linq;
@@ -12,11 +14,11 @@ namespace SoundInTheory.DynamicImage.Caching
 		private FileSystemWatcher _watcher;
 		private XDocument _doc;
 
-		public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
-		{
-			base.Initialize(name, config);
+        public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
+        {
+            base.Initialize(name, config);
 
-			_docPath = HttpContext.Current.Server.MapPath(string.Format("{0}/DynamicImageCache.xml", CachePath));
+            _docPath = FileSourceHelper.FilePathOnServer(string.Format("{0}/DynamicImageCache.xml", CachePath));
 			EnsureDocument();
 
 			_watcher = new FileSystemWatcher(Path.GetDirectoryName(_docPath), "DynamicImageCache.xml");
@@ -29,11 +31,11 @@ namespace SoundInTheory.DynamicImage.Caching
 				_watcher.Dispose();
 		}
 
-		private void EnsureDocument()
+        private void EnsureDocument()
 		{
 			lock (this)
 			{
-				string imageCacheFolder = HttpContext.Current.Server.MapPath(CachePath);
+                string imageCacheFolder = FileSourceHelper.FilePathOnServer(CachePath);
 				if (!Directory.Exists(imageCacheFolder))
 					Directory.CreateDirectory(imageCacheFolder);
 
@@ -95,7 +97,7 @@ namespace SoundInTheory.DynamicImage.Caching
 			}
 		}
 
-		public override ImageProperties GetPropertiesFromCache(string cacheKey)
+        public override ImageProperties GetPropertiesFromCache(string cacheKey)
 		{
 			EnsureDocument();
 
@@ -145,12 +147,12 @@ namespace SoundInTheory.DynamicImage.Caching
 					string cacheKey;
 					ImageProperties imageProperties;
 					GetImageProperties(itemElement, out cacheKey, out imageProperties);
-					DeleteImageFromDiskCache(cacheKey, imageProperties , HttpContext.Current);
+					DeleteImageFromDiskCache(cacheKey, imageProperties);
 					itemElement.Remove();
 				}
 				_doc.Save(_docPath);
 			}
-		}
+        }
 
 		public override void RemoveFromCache(Dependency dependency)
 		{
@@ -169,7 +171,7 @@ namespace SoundInTheory.DynamicImage.Caching
 					string cacheKey;
 					ImageProperties imageProperties;
 					GetImageProperties(itemElement, out cacheKey, out imageProperties);
-					DeleteImageFromDiskCache(cacheKey, imageProperties, HttpContext.Current);
+					DeleteImageFromDiskCache(cacheKey, imageProperties);
 					itemElement.Remove();
 				}
 

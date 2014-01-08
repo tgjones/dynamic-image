@@ -7,7 +7,7 @@ namespace SoundInTheory.DynamicImage.Caching
 	/// </summary>
 	internal class TransientCacheProvider : InProcDynamicImageCacheProvider
 	{
-		public override bool ExistsInCache(string cacheKey)
+        public override bool ExistsInCache(string cacheKey)
 		{
 			return false;
 		}

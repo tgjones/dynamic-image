@@ -88,11 +88,11 @@ namespace SoundInTheory.DynamicImage.Layers
 
 		#endregion
 
-        protected override void CreateImage(ImageGenerationContext context)
+        protected override void CreateImage()
 		{
 			// If width and height are not set, we need to measure the string.
 			int calculatedWidth, calculatedHeight;
-			Size measuredSize = MeasureString(context);
+			Size measuredSize = MeasureString();
 			if (Width == null || Height == null)
 			{
 				double width = Width ?? measuredSize.Width;
@@ -115,7 +115,7 @@ namespace SoundInTheory.DynamicImage.Layers
 			TextOptions.SetTextRenderingMode(dv, TextRenderingMode.Auto);
 			//TextOptions.SetTextFormattingMode(dv, TextFormattingMode.Ideal)
 
-			UseFormattedText(context, ft =>
+			UseFormattedText(ft =>
 			{
 				Pen pen = null;
 				if (StrokeWidth > 0 && StrokeColor != null)
@@ -178,20 +178,20 @@ namespace SoundInTheory.DynamicImage.Layers
 			}
 		}
 
-		private Size MeasureString(ImageGenerationContext context)
+        private Size MeasureString()
 		{
 			Size size = System.Windows.Size.Empty;
-			UseFormattedText(context, ft =>
+			UseFormattedText(ft =>
 			{
 				size = new Size(ft.WidthIncludingTrailingWhitespace, ft.Height);
 			});
 			return size;
 		}
 
-		private void UseFormattedText(ImageGenerationContext context, RenderCallback renderCallback)
+        private void UseFormattedText(RenderCallback renderCallback)
 		{
 			Brush textBrush = new SolidColorBrush(ForeColor.ToWpfColor());
-			FontDescription fontDescription = Font.GetFontDescription(context);
+			FontDescription fontDescription = Font.GetFontDescription();
 			var formattedText = new FormattedText(
 				Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
 				fontDescription.Typeface, fontDescription.Size, textBrush);
