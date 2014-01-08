@@ -5,7 +5,7 @@ namespace SoundInTheory.DynamicImage.Caching
 {
 	public static class ImageUrlGenerator
 	{
-		public static string GetImageUrl(Composition composition)
+        public static string GetImageUrl(Composition composition)
 		{
 			string cacheKey = composition.GetCacheKey();
 

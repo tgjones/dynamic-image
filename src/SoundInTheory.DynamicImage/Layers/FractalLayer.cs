@@ -60,7 +60,7 @@ namespace SoundInTheory.DynamicImage.Layers
 
 		#endregion
 
-        protected override void CreateImage(ImageGenerationContext context)
+        protected override void CreateImage()
 		{
 			Bitmap = new FastBitmap(Width, Height);
 			Bitmap.Lock();

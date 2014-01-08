@@ -32,10 +32,10 @@ namespace SoundInTheory.DynamicImage.Filters
 
 		#endregion
 
-        protected override Effect GetEffect(ImageGenerationContext context, FastBitmap source)
+        protected override Effect GetEffect(FastBitmap source)
 		{
 			// Get curves either from Curves collection or ACV file.
-			CurveCollection curves = GetCurves(context);
+			CurveCollection curves = GetCurves();
 
 			// Check that there are at least 4 curves.
 			if (curves.Count < 4)
@@ -62,10 +62,10 @@ namespace SoundInTheory.DynamicImage.Filters
 			};
 		}
 
-		private CurveCollection GetCurves(ImageGenerationContext context)
+        private CurveCollection GetCurves()
 		{
 			if (!string.IsNullOrEmpty(PhotoshopCurvesFileName))
-				return PhotoshopCurvesReader.ReadPhotoshopCurvesFile(FileSourceHelper.ResolveFileName(context, PhotoshopCurvesFileName));
+				return PhotoshopCurvesReader.ReadPhotoshopCurvesFile(FileSourceHelper.ResolveFileName(PhotoshopCurvesFileName));
 
 			return Curves;
 		}

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Web;
 using SoundInTheory.DynamicImage.Filters;
+using SoundInTheory.DynamicImage.Configuration;
 
 namespace SoundInTheory.DynamicImage.Util
 {
@@ -13,9 +14,9 @@ namespace SoundInTheory.DynamicImage.Util
 	{
 		private static string GetCairFolder()
 		{
-			string folder = (HttpContext.Current == null)
+            string folder = (string.IsNullOrEmpty(DynamicImageSettings.ServerPath))
 				? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CAIR")
-				: HttpContext.Current.Server.MapPath("~/App_Data/CAIR");
+                : FileSourceHelper.FilePathOnServer("~/App_Data/CAIR");
 			if (!Directory.Exists(folder))
 				Directory.CreateDirectory(folder);
 			return folder;

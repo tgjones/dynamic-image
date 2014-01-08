@@ -81,6 +81,12 @@ namespace SoundInTheory.DynamicImage.Filters
 
 		protected override void ApplyFilter(FastBitmap source, DrawingContext dc, int width, int height)
 		{
+            if (Width > source.Width)
+                Width = source.Width;
+
+            if (Height > source.Height)
+                Height = source.Height;
+
 			BitmapSource bitmapSource = new CroppedBitmap(source.InnerBitmap, new System.Windows.Int32Rect(X, Y, Width, Height));
 			dc.DrawImage(bitmapSource, new System.Windows.Rect(0, 0, width, height));
 		}

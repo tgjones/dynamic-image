@@ -1,3 +1,4 @@
+using SoundInTheory.DynamicImage.Configuration;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -13,9 +14,9 @@ namespace SoundInTheory.DynamicImage.Util
 	{
 		private static string GetCairFolder()
 		{
-			string folder = (HttpContext.Current == null)
+            string folder = (string.IsNullOrEmpty(DynamicImageSettings.ServerPath))
 				? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CutyCapt")
-				: HttpContext.Current.Server.MapPath("~/App_Data/CutyCapt");
+				: FileSourceHelper.FilePathOnServer("~/App_Data/CutyCapt");
 			if (!Directory.Exists(folder))
 				Directory.CreateDirectory(folder);
 			return folder;

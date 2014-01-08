@@ -58,7 +58,7 @@ namespace SoundInTheory.DynamicImage.Sources
 
 		#endregion
 
-        public override FastBitmap GetBitmap(ImageGenerationContext context)
+        public override FastBitmap GetBitmap()
 		{
 			SqlConnection conn = null; SqlDataAdapter adapter = null; DataTable dt = null;
 			try

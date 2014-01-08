@@ -36,7 +36,7 @@ namespace SoundInTheory.DynamicImage.Filters
 
 		#endregion
 
-        public override void ApplyFilter(ImageGenerationContext context, FastBitmap bitmap)
+        public override void ApplyFilter(FastBitmap bitmap)
 		{
 			if (Width == Unit.Empty && Height == Unit.Empty)
 				throw new DynamicImageException("At least one of Width or Height must be set.");

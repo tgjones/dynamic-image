@@ -14,9 +14,9 @@ namespace SoundInTheory.DynamicImage.Layers
 			set { this["Sides"] = value; }
 		}
 
-        protected sealed override void CreateImage(ImageGenerationContext context)
+        protected sealed override void CreateImage()
 		{
-			base.CreateImage(context);
+			base.CreateImage();
 
 			Rect bounds = new Rect(StrokeWidth / 2, StrokeWidth / 2,
 				CalculatedWidth - StrokeWidth,

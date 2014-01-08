@@ -61,7 +61,7 @@ namespace SoundInTheory.DynamicImage.Filters
 			return result;
 		}
 
-        protected override Effect GetEffect(ImageGenerationContext context, FastBitmap source)
+        protected override Effect GetEffect(FastBitmap source)
 		{
 			return new DropShadowEffect
 			{

@@ -34,7 +34,7 @@ namespace SoundInTheory.DynamicImage.Layers
 			get { return true; }
 		}
 
-		protected override void CreateImage(ImageGenerationContext context)
+        protected override void CreateImage()
 		{
 			string outputFileName = Path.GetTempFileName();
 

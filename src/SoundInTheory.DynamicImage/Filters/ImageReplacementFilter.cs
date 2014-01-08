@@ -23,7 +23,7 @@ namespace SoundInTheory.DynamicImage.Filters
 	    /// <param name="bitmap">
 	    /// Image to apply the <see cref="ImageReplacementFilter" /> to.
 	    /// </param>
-	    public sealed override void ApplyFilter(ImageGenerationContext context, FastBitmap bitmap)
+        public sealed override void ApplyFilter(FastBitmap bitmap)
 		{
 			OnBeginApplyFilter(bitmap);
 
@@ -34,7 +34,7 @@ namespace SoundInTheory.DynamicImage.Filters
 				return;
 
 			DrawingVisual dv = new DrawingVisual();
-			ConfigureDrawingVisual(context, bitmap, dv);
+			ConfigureDrawingVisual(bitmap, dv);
 
 			DrawingContext dc = dv.RenderOpen();
 
@@ -87,7 +87,7 @@ namespace SoundInTheory.DynamicImage.Filters
 	    /// <param name="context"></param>
 	    /// <param name="source"> </param>
 	    /// <param name="drawingVisual"></param>
-	    protected virtual void ConfigureDrawingVisual(ImageGenerationContext context, FastBitmap source, DrawingVisual drawingVisual)
+	    protected virtual void ConfigureDrawingVisual(FastBitmap source, DrawingVisual drawingVisual)
 		{
 			
 		}

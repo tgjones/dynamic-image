@@ -20,6 +20,6 @@ namespace SoundInTheory.DynamicImage.Filters
 	    /// <param name="context"></param>
 	    /// <param name="bitmap">Image to apply the 
 	    /// <see cref="SoundInTheory.DynamicImage.Filters.Filter" /> to.</param>
-	    public abstract void ApplyFilter(ImageGenerationContext context, FastBitmap bitmap);
+        public abstract void ApplyFilter(FastBitmap bitmap);
 	}
 }

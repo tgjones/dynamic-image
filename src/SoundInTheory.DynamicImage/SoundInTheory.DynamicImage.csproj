@@ -88,6 +88,7 @@
     <Compile Include="Caching\XmlCacheProvider.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="Colors.cs" />
+    <Compile Include="Configuration\DynamicImageSettings.cs" />
     <Compile Include="Fluent\ColorTintFilterBuilder.cs" />
     <Compile Include="Fluent\FractalLayerBuilder.cs" />
     <Compile Include="Fluent\JuliaFractalLayerBuilder.cs" />
@@ -231,7 +232,6 @@
     <Compile Include="Util\CubicSplineUtility.cs" />
     <Compile Include="Util\DispatcherTaskScheduler.cs" />
     <Compile Include="Util\FastBitmap.cs" />
-    <Compile Include="Util\ImageGenerationContext.cs" />
     <Compile Include="Util\Int32RectUtility.cs" />
     <Compile Include="Util\Int32Size.cs" />
     <Compile Include="Util\MathUtility.cs" />

@@ -10,9 +10,9 @@ namespace SoundInTheory.DynamicImage.Layers
 	/// </summary>
 	public class RectangleShapeLayer : ClosedShapeLayer
 	{
-        protected override sealed void CreateImage(ImageGenerationContext context)
+        protected override sealed void CreateImage()
 		{
-			base.CreateImage(context);
+			base.CreateImage();
 
 			Rect bounds = new Rect(StrokeWidth / 2, StrokeWidth / 2,
 				CalculatedWidth - StrokeWidth,

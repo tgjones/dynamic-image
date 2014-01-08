@@ -48,8 +48,7 @@ public abstract class DynamicImageCacheProvider : ProviderBase
 	public abstract void RemoveAllFromCache();
 	public abstract void RemoveFromCache(Dependency dependency);
 
-	public abstract DateTime GetImageLastModifiedDate(HttpContext context, 
-		string cacheKey, string fileExtension);
+	public abstract DateTime GetImageLastModifiedDate(string cacheKey, string fileExtension);
 	public abstract void SendImageToHttpResponse(HttpContext context, 
 		string cacheKey, string fileExtension);
 }

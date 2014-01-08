@@ -22,15 +22,15 @@ namespace SoundInTheory.DynamicImage.Layers
 			get { return true; }
 		}
 
-		protected override void CreateImage(ImageGenerationContext context)
+        protected override void CreateImage()
 		{
-			GhostscriptUtil.EnsureDll(context);
+			GhostscriptUtil.EnsureDll();
 
 			string outputFileName = Path.GetTempFileName();
 
 			try
 			{
-				string filename = FileSourceHelper.ResolveFileName(context, SourceFileName);
+				string filename = FileSourceHelper.ResolveFileName(SourceFileName);
 				GhostscriptWrapper.GeneratePageThumb(filename, outputFileName, PageNumber, 96, 96);
 				Bitmap = new FastBitmap(File.ReadAllBytes(outputFileName));
 			}

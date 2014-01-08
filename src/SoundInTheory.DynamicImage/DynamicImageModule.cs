@@ -12,10 +12,13 @@ namespace SoundInTheory.DynamicImage
 	///</summary>
 	public class DynamicImageModule : IHttpModule
 	{
-		public void Init(HttpApplication context)
+        public void Init(HttpApplication context)
 		{
 			context.PostAuthorizeRequest += OnContextPostAuthorizeRequest;
 			context.PreSendRequestHeaders += OnContextPreSendRequestHeaders;
+
+            if (HttpContext.Current != null && HttpContext.Current.Server != null)
+                DynamicImageSettings.Init(HttpContext.Current.Server.MapPath("~"));
 		}
 
 		private static void OnContextPreSendRequestHeaders(object sender, EventArgs e)
@@ -77,7 +80,7 @@ namespace SoundInTheory.DynamicImage
 			DynamicImageSection config = (DynamicImageSection) ConfigurationManager.GetSection("soundInTheory/dynamicImage");
 			if (config != null && config.BrowserCaching != null && config.BrowserCaching.Enabled)
 			{
-				DateTime tempDate = DynamicImageCacheManager.GetImageLastModifiedDate(context, cacheProviderKey, fileExtension);
+				DateTime tempDate = DynamicImageCacheManager.GetImageLastModifiedDate(cacheProviderKey, fileExtension);
 				DateTime lastModifiedDate = new DateTime(tempDate.Year, tempDate.Month, tempDate.Day, tempDate.Hour, tempDate.Minute,
 					tempDate.Second, 0); // This code copied from System.Web.StaticFileHandler.ProcessRequestInternal
 				DateTime now = DateTime.Now;

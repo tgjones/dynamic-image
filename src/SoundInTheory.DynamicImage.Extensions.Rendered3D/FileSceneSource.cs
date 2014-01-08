@@ -15,9 +15,9 @@ namespace SoundInTheory.DynamicImage
 			set { this["FileName"] = value; }
 		}
 
-		public override Scene GetScene(ImageGenerationContext context)
+        public override Scene GetScene()
 		{
-			string resolvedFileName = FileSourceHelper.ResolveFileName(context, FileName);
+			string resolvedFileName = FileSourceHelper.ResolveFileName(FileName);
 			if (File.Exists(resolvedFileName))
 				return MeshellatorLoader.ImportFromFile(resolvedFileName);
 			return null;

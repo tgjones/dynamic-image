@@ -21,7 +21,7 @@ namespace SoundInTheory.DynamicImage.Sources
             set { this["Timeout"] = value; }
         }
 
-        public override FastBitmap GetBitmap(ImageGenerationContext context)
+        public override FastBitmap GetBitmap()
         {
             using (var webClient = new ImpatientWebClient(Timeout))
             {

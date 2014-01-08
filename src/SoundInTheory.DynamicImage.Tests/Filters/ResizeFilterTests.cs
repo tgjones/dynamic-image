@@ -20,7 +20,7 @@ namespace SoundInTheory.DynamicImage.Tests.Filters
 			};
 
 			// Act.
-			resizeFilter.ApplyFilter(null, bitmap);
+			resizeFilter.ApplyFilter(bitmap);
 
 			// Assert.
 			Assert.AreEqual(200, bitmap.Width);
@@ -39,7 +39,7 @@ namespace SoundInTheory.DynamicImage.Tests.Filters
 			};
 
 			// Act.
-            resizeFilter.ApplyFilter(null, bitmap);
+            resizeFilter.ApplyFilter(bitmap);
 
 			// Assert.
 			Assert.AreEqual(300, bitmap.Width);
@@ -59,7 +59,7 @@ namespace SoundInTheory.DynamicImage.Tests.Filters
 			};
 
 			// Act.
-            resizeFilter.ApplyFilter(null, bitmap);
+            resizeFilter.ApplyFilter(bitmap);
 
 			// Assert.
 			Assert.AreEqual(250, bitmap.Width);
@@ -79,7 +79,7 @@ namespace SoundInTheory.DynamicImage.Tests.Filters
 			};
 
 			// Act.
-            resizeFilter.ApplyFilter(null, bitmap);
+            resizeFilter.ApplyFilter(bitmap);
 
 			// Assert.
 			Assert.AreEqual(200, bitmap.Width);
@@ -99,7 +99,7 @@ namespace SoundInTheory.DynamicImage.Tests.Filters
 			};
 
 			// Act.
-            resizeFilter.ApplyFilter(null, bitmap);
+            resizeFilter.ApplyFilter(bitmap);
 
 			// Assert.
 			Assert.AreEqual(150, bitmap.Width);
@@ -119,7 +119,7 @@ namespace SoundInTheory.DynamicImage.Tests.Filters
 			};
 
 			// Act.
-            resizeFilter.ApplyFilter(null, bitmap);
+            resizeFilter.ApplyFilter(bitmap);
 
 			// Assert.
 			Assert.AreEqual(250, bitmap.Width);

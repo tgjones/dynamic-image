@@ -55,12 +55,12 @@ namespace SoundInTheory.DynamicImage
 
 		#endregion
 
-        public FontDescription GetFontDescription(ImageGenerationContext context)
+        public FontDescription GetFontDescription()
 		{
 			FontFamily fontFamily;
 			if (!string.IsNullOrEmpty(CustomFontFile))
 			{
-                string fontFileName = FileSourceHelper.ResolveFileName(context, CustomFontFile);
+                string fontFileName = FileSourceHelper.ResolveFileName(CustomFontFile);
 				fontFamily = new FontFamily(fontFileName + "#" + Name);
 			}
 			else

@@ -56,7 +56,7 @@ namespace SoundInTheory.DynamicImage.Layers
 
 		#endregion
 
-        protected override void CreateImage(ImageGenerationContext context)
+        protected override void CreateImage()
 		{
 			if (this.Width != null)
 				this.CalculatedWidth = this.Width.Value;
