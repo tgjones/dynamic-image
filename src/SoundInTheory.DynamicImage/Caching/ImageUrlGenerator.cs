@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using SoundInTheory.DynamicImage.Configuration;
+using System.Configuration;
+using System.Linq;
 using System.Web;
 
 namespace SoundInTheory.DynamicImage.Caching
@@ -23,9 +25,11 @@ namespace SoundInTheory.DynamicImage.Caching
 
 		private static string GetUrl(string cacheKey, ImageProperties imageProperties)
 		{
-			const string path = "~/Assets/Images/DynamicImages/";
+            var config = ((DynamicImageSection)ConfigurationManager.GetSection("soundInTheory/dynamicImage")) ?? new DynamicImageSection();
+            string path = config.BaseVirtualPath;
 			string fileName = string.Format("{0}.{1}", cacheKey, imageProperties.FileExtension);
 			return VirtualPathUtility.ToAbsolute(path) + fileName;
 		}
-	}
+
+    }
 }
