@@ -2,6 +2,8 @@
 using System.IO;
 using System.Web.UI;
 using SoundInTheory.DynamicImage.Util;
+using SoundInTheory.DynamicImage.Caching;
+using System.Collections.Generic;
 
 namespace SoundInTheory.DynamicImage.Sources
 {
@@ -21,5 +23,13 @@ namespace SoundInTheory.DynamicImage.Sources
 				return new FastBitmap(resolvedFileName);
 			return null;
 		}
+
+        public override void PopulateDependencies(List<Dependency> dependencies)
+        {
+            Dependency dependency = new Dependency();
+            dependency.Text1 = FileName;
+            dependencies.Add(dependency);
+        }
+
 	}
 }
