@@ -118,6 +118,7 @@ namespace SoundInTheory.DynamicImage.Caching
 			dependencies.ForEach(RemoveByDependency);
 		}
 
+
 		public static void RemoveAll()
 		{
 			Provider.RemoveAllFromCache();

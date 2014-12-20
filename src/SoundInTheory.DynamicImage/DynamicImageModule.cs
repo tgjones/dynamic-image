@@ -12,6 +12,8 @@ namespace SoundInTheory.DynamicImage
 	///</summary>
 	public class DynamicImageModule : IHttpModule
 	{
+
+
 		public void Init(HttpApplication context)
 		{
 			context.PostAuthorizeRequest += OnContextPostAuthorizeRequest;
@@ -63,7 +65,9 @@ namespace SoundInTheory.DynamicImage
 			HttpApplication app = sender as HttpApplication;
 			if (app == null || app.Context == null || app.Context.Request == null)
 				return;
-			if (!string.IsNullOrEmpty(app.Context.Request.Path) && VirtualPathUtility.ToAppRelative(app.Context.Request.Path).StartsWith("~/Assets/Images/DynamicImages/", StringComparison.InvariantCultureIgnoreCase))
+
+            DynamicImageSection config = ((DynamicImageSection)ConfigurationManager.GetSection("soundInTheory/dynamicImage")) ?? new DynamicImageSection();
+			if (!string.IsNullOrEmpty(app.Context.Request.Path) && VirtualPathUtility.ToAppRelative(app.Context.Request.Path).StartsWith(config.BaseVirtualPath, StringComparison.InvariantCultureIgnoreCase))
 				HandleRequest(app.Context);
 		}
 

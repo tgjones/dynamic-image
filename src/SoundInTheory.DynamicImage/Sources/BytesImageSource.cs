@@ -1,4 +1,6 @@
-﻿using SoundInTheory.DynamicImage.Util;
+﻿using SoundInTheory.DynamicImage.Caching;
+using SoundInTheory.DynamicImage.Util;
+using System.Collections.Generic;
 
 namespace SoundInTheory.DynamicImage.Sources
 {
@@ -17,5 +19,13 @@ namespace SoundInTheory.DynamicImage.Sources
 				return new FastBitmap(bytes);
 			return null;
 		}
+
+        public override void PopulateDependencies(List<Dependency> dependencies)
+        {
+            // TO-DO: GERAR UM HASH DO BYTEARRAY E COLOCAR COMO DEPENDÊNCIA
+            // Dependency dependency = new Dependency();
+            // dependency.Text1 = Hash(Bytes);
+            // dependencies.Add(dependency);
+        }
 	}
 }

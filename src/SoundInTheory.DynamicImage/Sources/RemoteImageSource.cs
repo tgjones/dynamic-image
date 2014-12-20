@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Net;
 using System.Web.UI;
 using SoundInTheory.DynamicImage.Util;
+using SoundInTheory.DynamicImage.Caching;
+using System.Collections.Generic;
 
 namespace SoundInTheory.DynamicImage.Sources
 {
@@ -28,6 +30,13 @@ namespace SoundInTheory.DynamicImage.Sources
                 var bytes = webClient.DownloadData(Url);
                 return new FastBitmap(bytes);
             }
+        }
+
+        public override void PopulateDependencies(List<Dependency> dependencies)
+        {
+            Dependency dependency = new Dependency();
+            dependency.Text1 = Url;
+            dependencies.Add(dependency);
         }
 
         private class ImpatientWebClient : WebClient

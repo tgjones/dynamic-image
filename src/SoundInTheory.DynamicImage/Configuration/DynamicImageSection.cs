@@ -22,5 +22,14 @@ namespace SoundInTheory.DynamicImage.Configuration
 			get { return (DynamicImageFormat)this["defaultImageFormat"]; }
 			set { this["defaultImageFormat"] = value; }
 		}
+        
+        
+        [ConfigurationProperty("baseVirtualPath", DefaultValue = "~/assets/images/dynamicimages/")]
+        public string BaseVirtualPath
+        {
+            get { return (string)base["baseVirtualPath"]; }
+            set { this["baseVirtualPath"] = value; }
+        }
+
 	}
 }

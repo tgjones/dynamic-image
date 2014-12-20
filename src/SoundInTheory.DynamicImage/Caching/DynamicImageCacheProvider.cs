@@ -14,5 +14,6 @@ namespace SoundInTheory.DynamicImage.Caching
 
 		public abstract DateTime GetImageLastModifiedDate(HttpContext context, string cacheKey, string fileExtension);
 		public abstract void SendImageToHttpResponse(HttpContext context, string cacheKey, string fileExtension);
-	}
+
+    }
 }
