@@ -48,7 +48,6 @@ namespace SoundInTheory.DynamicImage
 					rtb.Render(dv);
 				}
 
-				imageSource = rtb;
 			}
 
 			return new FastBitmap(rtb);
