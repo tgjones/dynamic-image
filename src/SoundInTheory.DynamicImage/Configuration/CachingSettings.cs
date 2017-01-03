@@ -20,6 +20,13 @@ namespace SoundInTheory.DynamicImage.Configuration
 			set { this["customProvider"] = value; }
 		}
 
+		[ConfigurationProperty("cachePath")]
+	        public string cachePath
+	        {
+	            get { return this["cachePath"] as string; }
+	            set { this["cachePath"] = value; }
+	        }
+	        
 		[ConfigurationProperty("storeMissingImagesInCache", DefaultValue = true)]
 		public bool StoreMissingImagesInCache
 		{
